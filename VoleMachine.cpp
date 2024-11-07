@@ -33,3 +33,30 @@ void Memory::display() const {
         cout <<endl;
    }
 }
+
+RegisterBank::RegisterBank(int size) : registers(size, "00") {}
+
+string RegisterBank::getRegister(int r) const {
+    if (r < 0 || r >= registers.size()) {
+        cerr << "Error: Register index out of bounds!\n";
+        return "00";
+    }
+    return registers[r];
+}
+
+void RegisterBank::setRegister(int r, const string& value) {
+    if (r < 0 || r >= registers.size()) {
+        cerr << "Error: Register index out of bounds!\n";
+        return;
+    }
+    registers[r] = value;
+}
+
+void RegisterBank::display() const {
+    cout << "Registers:\n";
+    for (size_t i = 0; i < registers.size(); ++i) {
+        cout << "R" << i << ": " << setw(2) << setfill('0') << hex << uppercase << registers[i] << "  ";
+        cout << endl;
+    }
+}
+
